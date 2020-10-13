@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "![Actions Status](/workflows/hexlet-check/badge.svg)",
+  "main": "./bin/brain-games.js",
+  "type": "module",
+  "bin": {
+    "brain-games": "bin/brain-games.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hennessy811/frontend-project-lvl1.git"
+  },
+  "author": "Malakhov Dmitriy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hennessy811/frontend-project-lvl1/issues"
+  },
+  "homepage": "https://github.com/Hennessy811/frontend-project-lvl1#readme"
+}

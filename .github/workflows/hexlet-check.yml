@@ -8,8 +8,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      # Node versions list
+      matrix:
+        node-version: [14.x]
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Hexlet project check
-        uses: hexlet/project-action@release
+      - name: npm install, build
+      # Install and build project
+      run: |
+        make install
+      # Add environment variables
+      env:
+        CI: true
+      - name: Run linter
+        # Run Linter
+        run: |
+          make lint

@@ -18,9 +18,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: npm install, build
-      # Install and build project
+        # Install and build project
         run: make install
-      # Add environment variables
+        # Add environment variables
         env:
           CI: true
       - name: Run linter

@@ -1,18 +1,17 @@
 import promptly from 'promptly';
-import config from './config.js';
+import config from '../config.js';
 import greeting from './greeting.js';
 
-export default async (rules, questions) => {
+export default async (rules, questionsWithAnswers) => {
   const username = await greeting();
   if (!username) return;
-  let failed = false;
 
   if (rules) {
     console.log(rules);
   }
 
   for (let round = 0; round < config.roundsToWin; round += 1) {
-    const [question, answer] = questions[round];
+    const [question, answer] = questionsWithAnswers[round];
     const userAnswer = await promptly
       .prompt(`Question: ${question}`)
       .catch(() => {
@@ -27,12 +26,9 @@ export default async (rules, questions) => {
       console.log(
         `'${userAnswer}' is wrong answer ;(. Correct answer was '${answer}'.`,
       );
-      failed = true;
-      break;
+      return;
     }
   }
 
-  if (!failed) {
-    console.log(`Congratulations, ${username}`);
-  }
+  console.log(`Congratulations, ${username}`);
 };

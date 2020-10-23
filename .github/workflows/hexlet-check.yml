@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: npm install, build
-        # Install and build project
+      - name: npm install
+
         run: make install
         # Add environment variables
         env:

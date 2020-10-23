@@ -1,41 +1,39 @@
-import config from '../utils/config.js';
-import { getRandomNumber } from '../utils/numbers.js';
+import config from '../config.js';
+import getRandomNumber from '../utils/randomNumber.js';
 import play from '../utils/play.js';
 import rules from '../utils/rules.js';
 
-const getOperation = () => {
-  const items = ['+', '-', '*'];
-  return items[Math.floor(Math.random() * items.length)];
-};
+const questionsWithAnswers = Array.from({ length: config.roundsToWin }).map(
+  () => {
+    const n1 = getRandomNumber();
+    const n2 = getRandomNumber();
 
-const questions = Array.from({ length: config.roundsToWin }).map(() => {
-  const n1 = getRandomNumber();
-  const n2 = getRandomNumber();
+    const possibleOperations = ['+', '-', '*'];
+    const operation = possibleOperations[getRandomNumber(0, 3)];
+    let q = '';
+    let answer = '';
 
-  const operation = getOperation();
-  let q = '';
-  let answer = '';
+    switch (operation) {
+      case '+':
+        q = `${n1} + ${n2}`;
+        answer = n1 + n2;
+        break;
+      case '-':
+        q = `${n1} - ${n2}`;
+        answer = n1 - n2;
+        break;
+      case '*':
+        q = `${n1} * ${n2}`;
+        answer = n1 * n2;
+        break;
+      default:
+        break;
+    }
 
-  switch (operation) {
-    case '+':
-      q = `${n1} + ${n2}`;
-      answer = String(n1 + n2);
-      break;
-    case '-':
-      q = `${n1} - ${n2}`;
-      answer = String(n1 - n2);
-      break;
-    case '*':
-      q = `${n1} * ${n2}`;
-      answer = String(n1 * n2);
-      break;
-    default:
-      break;
-  }
-
-  return [q, answer];
-});
+    return [q, String(answer)];
+  },
+);
 
 export default async () => {
-  play(rules.calc, questions);
+  play(rules.calc, questionsWithAnswers);
 };
